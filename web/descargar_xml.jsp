@@ -6,8 +6,7 @@
     String filename = claveAcceso + ".xml";
     //String filepath = "/app/quijotelu/autorizado/"; 
     String filepath = directorio.getRutaArchivoAutorizado();
-    //response.setContentType("APPLICATION/OCTET-STREAM"); 
-    response.setContentType("text/plain");
+    response.setContentType("APPLICATION/OCTET-STREAM"); 
     response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
     File file = new File(filepath + File.separatorChar + filename);
     java.io.FileInputStream fileInputStream = new java.io.FileInputStream(file);
