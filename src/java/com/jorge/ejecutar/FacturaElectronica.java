@@ -92,4 +92,12 @@ public class FacturaElectronica {
 
         return mensaje;
     }
+     public void reimprimir(String claveAcceso){
+         DirectorioConfiguracion dirConfig = new DirectorioConfiguracion();
+         String RutaArchivoGenerado = dirConfig.getRutaArchivoGenerado();
+         String NombreArchivo = claveAcceso;
+         FacturaPDF pdf = new FacturaPDF(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml");
+         pdf.genera("", "");
+         System.out.println("Genera reporte");
+     }
 }

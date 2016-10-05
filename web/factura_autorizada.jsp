@@ -77,6 +77,7 @@
                         <th>Correo electrónico</th>
                         <th>XML</th>
                         <th>PDF</th>
+                        <th>GENERAR</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,6 +93,7 @@
                                 out.println("<td><a href=\"enviar_correo.jsp?claveAcceso=" + rs.getString(8) + "&correo=" + rs.getString(7) + "\" target=\"_blank\">" + rs.getString(7) + "</a></td>");
                                 out.println("<td><a href=\"descargar_xml.jsp?claveAcceso=" + rs.getString(8) + "\">XML</a></td>");
                                 out.println("<td><a href=\"descargar_pdf.jsp?claveAcceso=" + rs.getString(9) + "\">PDF</a></td>");
+                                out.println("<td><a href=\"reimprimir_pdf.jsp?claveAcceso=" + rs.getString(9) + "&codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">PDF</a></td>");
                                 out.println("</tr>");
                             }
 
