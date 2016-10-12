@@ -68,6 +68,7 @@ public class GeneraFactura {
     List<TotalImpuesto> totalImpuesto = new ArrayList<>();
     List<Detalle> detalle = new ArrayList<>();
     InformacionAdicional informacionAdicional = new InformacionAdicional();
+    List<CampoAdicional> campoAdicional = new ArrayList<>();
 
     void generaArchivo(String RutaArchivo, String NombreArchivo) {
         factura.setId("comprobante");
@@ -153,7 +154,6 @@ public class GeneraFactura {
 
                     totalImpuesto.add(new TotalImpuesto("2", codigoIVA, rs.getFloat("TOTAL_CON_IVA"), rs.getFloat("IVA")));
                 }
-                List<CampoAdicional> campoAdicional = new ArrayList<>();
                 if (rs.getString("DIRECCION") != null) {
                     campoAdicional.add(new CampoAdicional("Dirección", rs.getString("DIRECCION")));
                 }
@@ -202,10 +202,10 @@ public class GeneraFactura {
             ResultSet rs = null;
             String sql;
             stmt = conn.createStatement();
-            sql = consultas.FormaPago + " WHERE factura=" + numero +" and rownum=1";
+            sql = consultas.FormaPago + " WHERE factura=" + numero + " and rownum=1";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                pago.add(new Pago(rs.getString("CODIGO"), total));                
+                pago.add(new Pago(rs.getString("CODIGO"), total));
             }
             infoF.setPagos(new Pagos(pago));
             System.out.println("SQL Consultas.FormaPago correcto");
@@ -244,6 +244,9 @@ public class GeneraFactura {
             infoF.setTotalConImpuestos(new TotalConImpuestos(totalImpuesto));
             factura.setInfoFactura(infoF);
             factura.setDetalles(new Detalles(detalle));
+    
+            formaPagoInformacionAdicional(conn,consultas.FormaPago,codigo,numero);
+
             if (!informacionAdicional.getCampoAdicional().isEmpty()) {
                 factura.setInfoAdicional(informacionAdicional);
             }
@@ -280,5 +283,28 @@ public class GeneraFactura {
             Logger.getLogger(GeneraFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
         return porcentajeIVA;
+    }
+
+    void formaPagoInformacionAdicional(Connection conn, String consulta, String codigo, String numero) {
+
+               
+        try {
+            Statement stmt = null;
+            ResultSet rs = null;
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(consulta + " WHERE factura=" + numero);
+            while (rs.next()) {
+                campoAdicional.add(new CampoAdicional("Forma de Pago", rs.getString("FORMA_PAGO")));
+                campoAdicional.add(new CampoAdicional("Plazo", rs.getInt("PLAZO")+ " " + rs.getString("TIEMPO")));
+            }
+            informacionAdicional.setCampoAdicional(campoAdicional);
+            rs.close();
+            stmt.close();
+            System.out.println("SQL Consultas.FormaPago Información Adicional correcto");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GeneraFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

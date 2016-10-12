@@ -87,7 +87,7 @@ public class Consultas {
                 config.save();
             }  
             if (config.getProperty("consulta.FormaPago") == null) {
-                config.setProperty("consulta.FormaPago", "SELECT factura,CODIGO FROM V_FORMA_PAGO_FACTURA");
+                config.setProperty("consulta.FormaPago", "SELECT FACTURA,CODIGO,FORMA_PAGO,PLAZO,TIEMPO FROM V_FORMA_PAGO_FACTURA");
                 config.save();
             } 
             InformacionTributaria = config.getProperty("consulta.InformacionTributaria").toString().replace("[", "").replace("]", "");
