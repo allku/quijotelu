@@ -1,15 +1,17 @@
 --------------------------------------------------------
+-- Archivo creado  - miércoles-octubre-12-2016   
+--------------------------------------------------------
+--------------------------------------------------------
 --  DDL for View V_FORMA_PAGO_FACTURA
 --------------------------------------------------------
-CREATE OR REPLACE FORCE VIEW V_FORMA_PAGO_FACTURA ("PAGO", "FORMA_PAGO",
-  "CODIGO", "FACTURA", "PLAZO", "TIEMPO")
-AS
+
+  CREATE OR REPLACE FORCE VIEW "V_FORMA_PAGO_FACTURA" ("PAGO", "FORMA_PAGO", "CODIGO", "FACTURA", "PLAZO", "TIEMPO") AS 
   SELECT
     NVL(EFECTIVO,0)                          AS pago,
     'SIN UTILIZACION DEL SISTEMA FINANCIERO' AS forma_pago,
     '01'                                     AS codigo,
     num_pago,
-    NULL,
+    0,
     NULL
   FROM
     CXC_PAGO_CONTADO
@@ -19,17 +21,17 @@ AS
   UNION
 
   /*
-  select 0, 'Dinero electr�nico','17' as codigo,num_pago
+  select 0, 'Dinero electrónico','17' as codigo,num_pago
   from CXC_PAGO_CONTADO
   where COD_DOCUMENTO='FAC'
   union
   */
   SELECT
     NVL(tarjeta,0),
-    'TARJETA DE CR�DITO',
+    'TARJETA DE CRÉDITO',
     '19' AS codigo,
     num_pago,
-    NULL,
+    0,
     NULL
   FROM
     CXC_PAGO_CONTADO
@@ -42,7 +44,7 @@ AS
     'CHEQUE PROPIO',
     '02' AS codigo,
     num_pago,
-    NULL,
+    0,
     NULL
   FROM
     CXC_PAGO_CONTADO
@@ -55,7 +57,7 @@ AS
     'DEPOSITO EN CUENTA',
     '13' AS codigo,
     num_pago,
-    NULL,
+    0,
     NULL
   FROM
     CXC_PAGO_CONTADO
@@ -68,7 +70,6 @@ AS
     ' OTROS CON UTILIZACION DEL SISTEMA FINANCIERO',
     '20' AS codigo,
     f.num_pago,
-    1,
     (
       SELECT
         cxc.DIAS_PLAZO
@@ -77,9 +78,23 @@ AS
       WHERE
         cxc.COD_DOCUMENTO  ='FAC'
       AND cxc.NUM_DOCUMENTO=f.num_pago
-    )
+    ),
+    'Días'
   FROM
     CXC_PAGO_CONTADO f
   WHERE
     f.COD_DOCUMENTO   ='FAC'
-  AND NVL(f.credito,0)>0;
+  AND NVL(f.credito,0)>0
+  UNION
+  SELECT
+    NVL(f.OTROS,0),
+    ' OTROS CON UTILIZACION DEL SISTEMA FINANCIERO',
+    '20' AS codigo,
+    f.num_pago,
+    0,
+    null
+  FROM
+    CXC_PAGO_CONTADO f
+  WHERE
+    f.COD_DOCUMENTO   ='FAC'
+  AND NVL(f.OTROS,0)>0;

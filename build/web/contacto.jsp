@@ -21,9 +21,9 @@
             <div class="jumbotron">
                 <h1>Contacto</h1>
                 <p>Jorge Luis Quiguango</p>
-                <p>Correo electrónico: jorjoluiso@gmail.com</p>
+                <p>Correo electrónico: jorgequiguango@icloud.com</p>
                 <p>Teléfono: 0969528480</p>
-                <p><a href="http://quijotelui.ec" target="_blank">quijotelui.ec</a></p>
+                <!--<p><a href="http://quijotelui.ec" target="_blank">quijotelui.ec</a></p>-->
             </div>
         </div>
         <script src="js/jquery-2.1.4.min.js"></script>

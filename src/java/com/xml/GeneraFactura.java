@@ -244,8 +244,8 @@ public class GeneraFactura {
             infoF.setTotalConImpuestos(new TotalConImpuestos(totalImpuesto));
             factura.setInfoFactura(infoF);
             factura.setDetalles(new Detalles(detalle));
-    
-            formaPagoInformacionAdicional(conn,consultas.FormaPago,codigo,numero);
+
+            formaPagoInformacionAdicional(conn, consultas.FormaPago, codigo, numero);
 
             if (!informacionAdicional.getCampoAdicional().isEmpty()) {
                 factura.setInfoAdicional(informacionAdicional);
@@ -287,15 +287,16 @@ public class GeneraFactura {
 
     void formaPagoInformacionAdicional(Connection conn, String consulta, String codigo, String numero) {
 
-               
         try {
             Statement stmt = null;
             ResultSet rs = null;
             stmt = conn.createStatement();
             rs = stmt.executeQuery(consulta + " WHERE factura=" + numero);
             while (rs.next()) {
-                campoAdicional.add(new CampoAdicional("Forma de Pago", rs.getString("FORMA_PAGO")));
-                campoAdicional.add(new CampoAdicional("Plazo", rs.getInt("PLAZO")+ " " + rs.getString("TIEMPO")));
+                campoAdicional.add(new CampoAdicional("Pago", rs.getString("FORMA_PAGO")));
+                if (rs.getInt("PLAZO") > 0) {
+                    campoAdicional.add(new CampoAdicional("Plazo", rs.getInt("PLAZO") + " " + rs.getString("TIEMPO")));
+                }
             }
             informacionAdicional.setCampoAdicional(campoAdicional);
             rs.close();
