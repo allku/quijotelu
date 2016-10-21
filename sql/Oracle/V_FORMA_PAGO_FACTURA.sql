@@ -5,14 +5,16 @@
 --  DDL for View V_FORMA_PAGO_FACTURA
 --------------------------------------------------------
 
-  CREATE OR REPLACE FORCE VIEW "V_FORMA_PAGO_FACTURA" ("PAGO", "FORMA_PAGO", "CODIGO", "FACTURA", "PLAZO", "TIEMPO") AS 
-  SELECT
+  CREATE OR REPLACE FORCE VIEW "V_FORMA_PAGO_FACTURA" ("PAGO", "FORMA_PAGO", "CODIGO", "FACTURA", "PLAZO", "TIEMPO","CLIENTE","FECHA") AS 
+SELECT
     NVL(EFECTIVO,0)                          AS pago,
     'SIN UTILIZACION DEL SISTEMA FINANCIERO' AS forma_pago,
     '01'                                     AS codigo,
     num_pago,
-    0,
-    NULL
+    0 PLAZO,
+    'Días' TIEMPO,
+    COD_CLIENTE cliente,
+    FECHA_DOCUMENTO FECHA
   FROM
     CXC_PAGO_CONTADO
   WHERE
@@ -32,7 +34,9 @@
     '19' AS codigo,
     num_pago,
     0,
-    NULL
+    'Días',
+    COD_CLIENTE,
+    FECHA_DOCUMENTO
   FROM
     CXC_PAGO_CONTADO
   WHERE
@@ -41,11 +45,13 @@
   UNION
   SELECT
     NVL(CHEQUES,0),
-    'CHEQUE PROPIO',
-    '02' AS codigo,
+    ' OTROS CON UTILIZACION DEL SISTEMA FINANCIERO',
+    '20' AS codigo,
     num_pago,
     0,
-    NULL
+    'Días',
+    COD_CLIENTE,
+    FECHA_DOCUMENTO
   FROM
     CXC_PAGO_CONTADO
   WHERE
@@ -54,11 +60,13 @@
   UNION
   SELECT
     NVL(DEPOSITO,0),
-    'DEPOSITO EN CUENTA',
-    '13' AS codigo,
+    ' OTROS CON UTILIZACION DEL SISTEMA FINANCIERO',
+    '20' AS codigo,
     num_pago,
     0,
-    NULL
+    'Días',
+    COD_CLIENTE,
+    FECHA_DOCUMENTO
   FROM
     CXC_PAGO_CONTADO
   WHERE
@@ -79,7 +87,9 @@
         cxc.COD_DOCUMENTO  ='FAC'
       AND cxc.NUM_DOCUMENTO=f.num_pago
     ),
-    'Días'
+    'Días',
+    COD_CLIENTE,
+    FECHA_DOCUMENTO
   FROM
     CXC_PAGO_CONTADO f
   WHERE
@@ -92,7 +102,9 @@
     '20' AS codigo,
     f.num_pago,
     0,
-    null
+    'Días',
+    COD_CLIENTE,
+    FECHA_DOCUMENTO
   FROM
     CXC_PAGO_CONTADO f
   WHERE

@@ -30,6 +30,7 @@ public class Consultas {
     public String DestinatarioDetalle;
     public String GuiaRemisionFactura;
     public String FormaPago;
+    public String FacturaPorcentajeIva;
 
     public Consultas() {
         try {
@@ -59,7 +60,7 @@ public class Consultas {
                 config.save();
             }
             if (config.getProperty("consulta.NotaCreditoDetalle") == null) {
-                config.setProperty("consulta.NotaCreditoDetalle", "select CODIGO,NUMERO,CODIGO_INTERNO,DESCRIPCION,CANTIDAD,PRECIO_UNITARIO,DESCUENTO,PRECIO_TOTAL_SIN_IMPUESTO,CODIGO_PORCENTAJE,PORCENTAJE_IVA,VALOR_IVA from V_INFO_NOTA_CREDITO_DETALLE");
+                config.setProperty("consulta.NotaCreditoDetalle", "SELECT CODIGO,NUMERO,CODIGO_INTERNO,DESCRIPCION,CANTIDAD,PRECIO_UNITARIO,DESCUENTO,PRECIO_TOTAL_SIN_IMPUESTO,CODIGO_PORCENTAJE,PORCENTAJE_IVA,VALOR_IVA from V_INFO_NOTA_CREDITO_DETALLE");
                 config.save();
             }
             if (config.getProperty("consulta.NotaDebitoMaestro") == null) {
@@ -90,6 +91,10 @@ public class Consultas {
                 config.setProperty("consulta.FormaPago", "SELECT FACTURA,CODIGO,FORMA_PAGO,PLAZO,TIEMPO FROM V_FORMA_PAGO_FACTURA");
                 config.save();
             } 
+            if (config.getProperty("consulta.FacturaPorcentajeIva") == null) {
+                config.setProperty("consulta.FacturaPorcentajeIva", "SELECT CODIGO,NUMERO,PORCENTAJE_IVA FROM V_INFO_FACTURA_PORCENTAJE_IVA");
+                config.save();
+            }
             InformacionTributaria = config.getProperty("consulta.InformacionTributaria").toString().replace("[", "").replace("]", "");
             FacturaMaestro = config.getProperty("consulta.FacturaMaestro").toString().replace("[", "").replace("]", "");
             FacturaDetalle = config.getProperty("consulta.FacturaDetalle").toString().replace("[", "").replace("]", "");
@@ -104,6 +109,7 @@ public class Consultas {
             DestinatarioDetalle = config.getProperty("consulta.DestinatarioDetalle").toString().replace("[", "").replace("]", "");
             GuiaRemisionFactura = config.getProperty("consulta.GuiaRemisionFactura").toString().replace("[", "").replace("]", "");
             FormaPago = config.getProperty("consulta.FormaPago").toString().replace("[", "").replace("]", "");
+            FacturaPorcentajeIva = config.getProperty("consulta.FacturaPorcentajeIva").toString().replace("[", "").replace("]", "");
             //System.out.print("InformacionTributaria "+InformacionTributaria);
         } catch (ConfigurationException ex) {
             Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);

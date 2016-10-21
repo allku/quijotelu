@@ -60,8 +60,7 @@ public class MotorConfiguracion {
                 if (configSqlServer.getProperty("sqlserver.host") == null) {
                     configSqlServer.setProperty("sqlserver.host", "127.0.0.1");
                     configSqlServer.save();
-                }
-
+                }                
                 if (configSqlServer.getProperty("sqlserver.puerto") == null) {
                     configSqlServer.setProperty("oracle.puerto", "1521");
                     configSqlServer.save();

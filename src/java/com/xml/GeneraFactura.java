@@ -202,10 +202,11 @@ public class GeneraFactura {
             ResultSet rs = null;
             String sql;
             stmt = conn.createStatement();
-            sql = consultas.FormaPago + " WHERE factura=" + numero + " and rownum=1";
+            sql = consultas.FormaPago + " WHERE factura=" + numero;
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 pago.add(new Pago(rs.getString("CODIGO"), total));
+                break;
             }
             infoF.setPagos(new Pagos(pago));
             System.out.println("SQL Consultas.FormaPago correcto");
@@ -271,8 +272,7 @@ public class GeneraFactura {
             ResultSet rs = null;
             String sql;
             stmt = conn.createStatement();
-            sql = consultas.FacturaDetalle + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero
-                    + " AND PORCENTAJE_IVA>0 AND rownum=1";
+            sql = consultas.FacturaPorcentajeIva + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero;
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 porcentajeIVA = rs.getInt("PORCENTAJE_IVA");

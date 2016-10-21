@@ -28,6 +28,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 public class General {
 
     public String BaseDatos;
+    public String Publicidad;
 
     public General() {
         try {
@@ -39,8 +40,14 @@ public class General {
                  */
                 config.setProperty("general.BaseDatos", "oracle");
                 config.save();
+            }         
+            if (config.getProperty("general.Publicidad") == null) {
+                config.setProperty("general.Publicidad", "si");
+                config.save();
             }
             BaseDatos = (String) config.getProperty("general.BaseDatos");
+            Publicidad = (String) config.getProperty("general.Publicidad");
+            
         } catch (ConfigurationException ex) {
             Logger.getLogger(General.class.getName()).log(Level.SEVERE, null, ex);
         }
