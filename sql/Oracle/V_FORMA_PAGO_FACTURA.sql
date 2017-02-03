@@ -80,7 +80,7 @@ SELECT
     f.num_pago,
     (
       SELECT
-        cxc.DIAS_PLAZO
+        max(cxc.DIAS_PLAZO)
       FROM
         CXC_DOC_COBRAR cxc
       WHERE
