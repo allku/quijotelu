@@ -20,11 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.jsp"> <% if (general.Publicidad.equals("si")) {
-                    out.print("Quijotelu");
-                } else {
-                    out.print("Facturación Electrónica");
-                } %></a>
+            <a class="navbar-brand" href="index.jsp"> <%=general.Nombre%></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">

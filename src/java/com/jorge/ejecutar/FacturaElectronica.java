@@ -82,10 +82,11 @@ public class FacturaElectronica {
         } else {
             GrabaRespuesta graba = new GrabaRespuesta(codigoComprobante, numeroComprobante, mensaje);
             graba.setRespuesta();
+            /*
             FacturaPDF pdf = new FacturaPDF(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml");
             pdf.genera("", "");
             System.out.println("Genera reporte");
-
+            */
             System.out.println("No autorizó el SRI");
             System.out.println("Mensaje " + mensaje);
         }

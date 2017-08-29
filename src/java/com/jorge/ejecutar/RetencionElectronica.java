@@ -90,9 +90,11 @@ public class RetencionElectronica {
         } else {
             GrabaRespuesta graba = new GrabaRespuesta(codigoComprobante, numeroComprobante, mensaje);
             graba.setRespuesta();
+            /*
             RetencionPDF pdf = new RetencionPDF(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml");
             pdf.genera("", "");
             System.out.println("Genera reporte");
+            */
             System.out.println("No autorizó el SRI");
             System.out.println("Mensaje " + mensaje);
         }

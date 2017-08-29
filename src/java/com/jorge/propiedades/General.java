@@ -29,6 +29,7 @@ public class General {
 
     public String BaseDatos;
     public String Publicidad;
+    public String Nombre;
 
     public General() {
         try {
@@ -45,8 +46,13 @@ public class General {
                 config.setProperty("general.Publicidad", "si");
                 config.save();
             }
+            if (config.getProperty("general.Nombre") == null) {
+                config.setProperty("general.Nombre", "QuijoteLu");
+                config.save();
+            }
             BaseDatos = (String) config.getProperty("general.BaseDatos");
             Publicidad = (String) config.getProperty("general.Publicidad");
+            Nombre = (String) config.getProperty("general.Nombre");
             
         } catch (ConfigurationException ex) {
             Logger.getLogger(General.class.getName()).log(Level.SEVERE, null, ex);
