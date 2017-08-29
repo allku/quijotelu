@@ -89,7 +89,7 @@ public class ComprobanteElectronico {
                 respuestaRecepcion = EnvioComprobantesWS.obtenerRespuestaEnvio(ArchivoXML, claveAccesoComprobante, wsEnvio);
                 if (respuestaRecepcion.getEstado().equals("RECIBIDA")) {
                     Thread.currentThread();
-                    Thread.sleep(10 * 1000);
+                    Thread.sleep(3 * 1000);
                     String respuestaAutoriz = AutorizacionComprobantesWS.autorizarComprobanteIndividual(claveAccesoComprobante, ArchivoXML.getName(), wsAutoriza);
 
                     String estado = null;
