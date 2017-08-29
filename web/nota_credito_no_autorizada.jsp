@@ -65,6 +65,9 @@
                         <th>Código</th>
                         <th>Número</th>
                         <th>Fecha</th>
+                        <th>Tarifa 12</th>
+                        <th>Tarifa 0</th>
+                        <th>IVA</th>
                         <th>Total</th>
                         <th>Documento</th>
                         <th>Razón social</th>
@@ -84,7 +87,10 @@
                                 out.println("<td>" + rs.getString(5) + "</td>");
                                 out.println("<td>" + rs.getString(6) + "</td>");
                                 out.println("<td>" + rs.getString(7) + "</td>");
-                                out.println("<td><a href=\"estado_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\" target=\"_blank\">" + rs.getString(8) + "</a></td>");
+                                out.println("<td>" + rs.getString(8) + "</td>");
+                                out.println("<td>" + rs.getString(9) + "</td>");
+                                out.println("<td>" + rs.getString(10) + "</td>");
+                                out.println("<td><a href=\"estado_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\" target=\"_blank\">" + rs.getString(11) + "</a></td>");
                                 out.println("<td><a href=\"procesar_autorizacion.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Autorizar</a></td>");
                                 out.println("</tr>");
                             }
