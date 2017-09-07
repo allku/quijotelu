@@ -12,26 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/data/git/quijotelu/web/contacto.jsp</file>
-            <file>file:/data/git/quijotelu/web/descargar_xml.jsp</file>
-            <file>file:/data/git/quijotelu/web/factura_no_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/retencion_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/nota_credito_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/nota_credito_no_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/guia_remision_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/guia_remision_no_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/autorizar_facturas.jsp</file>
-            <file>file:/data/git/quijotelu/web/index.jsp</file>
-            <file>file:/data/git/quijotelu/web/estado_comprobante.jsp</file>
-            <file>file:/data/git/quijotelu/web/reimprimir_pdf.jsp</file>
-            <file>file:/data/git/quijotelu/web/enviar_correo.jsp</file>
-            <file>file:/data/git/quijotelu/web/PruebaConexion.jsp</file>
-            <file>file:/data/git/quijotelu/web/acerca.jsp</file>
-            <file>file:/data/git/quijotelu/web/procesar_autorizacion.jsp</file>
-            <file>file:/data/git/quijotelu/web/descargar_pdf.jsp</file>
-            <file>file:/data/git/quijotelu/web/factura_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/retencion_no_autorizada.jsp</file>
-            <file>file:/data/git/quijotelu/web/templates/navigation-bar.jsp</file>
+            <file>file:/data/git/quijotelu/src/java/com/jorge/propiedades/FirmaConfiguracion.java</file>
+            <file>file:/data/git/quijotelu/src/java/com/jorge/firma/GenericXMLSignature.java</file>
+            <file>file:/data/git/quijotelu/src/java/com/jorge/firma/XAdESBESSignature.java</file>
         </group>
     </open-files>
 </project-private>

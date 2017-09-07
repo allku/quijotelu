@@ -40,7 +40,7 @@ public class FirmaConfiguracion {
             }
 
             if (config.getProperty("Firma.Clave_PKCS12") == null) {
-                config.setProperty("Firma.Clave_PKCS12", "Gluc4g0n");
+                config.setProperty("Firma.Clave_PKCS12", "miclave");
                 config.save();
             }
             PKCS12_RESOURCE = (String) config.getProperty("Firma.Ruta_PKCS12");

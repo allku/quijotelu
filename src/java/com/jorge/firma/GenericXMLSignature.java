@@ -79,7 +79,7 @@ public abstract class GenericXMLSignature {
      * Constraseña de acceso a la clave privada del usuario
      * </p>
      */
-    public String PKCS12_PASSWORD = "Gluc4g0n";
+    public String PKCS12_PASSWORD = "miclave";
 
     /**
      * <p>

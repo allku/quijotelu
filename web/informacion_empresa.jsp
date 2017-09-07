@@ -69,8 +69,8 @@
                             out.println(rs.getString("OBLIGADO_CONTABILIDAD"));
                             out.println("</p>");
                             out.println("<p>");
-                            out.println("Número de Contribuyente Especial: ");
                             if(rs.getString("CONTRIBUYENTE_ESPECIAL") != null){
+                            out.println("Número de Contribuyente Especial: ");                            
                                 out.println(rs.getString("CONTRIBUYENTE_ESPECIAL"));
                             }                            
                             out.println("</p>");
