@@ -15,8 +15,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">     
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Información de la empresa</title>
+        <title>Información de la Empresa</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/starter-template.css" rel="stylesheet">
     </head>
@@ -25,7 +26,7 @@
             <jsp:param name="active" value="Empresa"/>
         </jsp:include>
         <div class="container">
-            <h1>Información de la empresa</h1>
+            <h1>Información de la Empresa</h1>
             <div class="jumbotron">
 
                 <%
@@ -69,7 +70,9 @@
                             out.println("</p>");
                             out.println("<p>");
                             out.println("Número de Contribuyente Especial: ");
-                            out.println(rs.getString("CONTRIBUYENTE_ESPECIAL"));
+                            if(rs.getString("CONTRIBUYENTE_ESPECIAL") != null){
+                                out.println(rs.getString("CONTRIBUYENTE_ESPECIAL"));
+                            }                            
                             out.println("</p>");
                         }
 
