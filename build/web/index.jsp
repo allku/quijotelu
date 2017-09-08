@@ -56,7 +56,13 @@
                     <a href="guia_remision_no_autorizada.jsp">Guías de remisión no autorizadas</a>
                 </div>
                 <div class="panel-body">
-                    <a href="autorizar_facturas.jsp">Autorizar facturas</a>
+                    <a href="autorizar_facturas_manual.jsp">Autorizar facturas</a>
+                </div>
+                <div class="panel-body">
+                    <a href="autorizar_facturas_manual_dia_anterior.jsp">Autorizar facturas del día anterior</a>
+                </div>
+                <div class="panel-body">
+                    <a href="autorizar_facturas.jsp">Autorizar facturas automático</a>
                 </div>
             </div>
         </div>
