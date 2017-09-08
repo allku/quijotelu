@@ -3,14 +3,19 @@
     Created on : 20/11/2014, 9:25:43
     Author     : jorjoluiso
 --%>
-
+<%@page import="com.jorge.propiedades.General"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    General general = new General();
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quijotelu Electrónico</title>
+        <title><%=general.Nombre%> Electrónico</title>
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/starter-template.css" rel="stylesheet">
