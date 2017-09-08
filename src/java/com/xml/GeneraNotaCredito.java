@@ -115,7 +115,7 @@ public class GeneraNotaCredito {
             ResultSet rs;
             stmt = conn.createStatement();
 
-            rs = stmt.executeQuery(consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero);
+            rs = stmt.executeQuery(consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO='" + numero + "'");
             while (rs.next()) {
                 infoT.setCodDoc(rs.getString("CODIGO_DOCUMENTO"));
                 infoT.setEstab(rs.getString("ESTABLECIMIENTO"));
@@ -175,7 +175,7 @@ public class GeneraNotaCredito {
             Statement stmt;
             ResultSet rs;
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero);
+            rs = stmt.executeQuery(consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO='" + numero + "'");
             while (rs.next()) {
                 List<Impuesto> impuesto = new ArrayList<>();
                 impuesto.add(new Impuesto("2", rs.getString("CODIGO_PORCENTAJE"), rs.getFloat("PORCENTAJE_IVA"), rs.getFloat("PRECIO_TOTAL_SIN_IMPUESTO"), rs.getFloat("VALOR_IVA")));
@@ -241,8 +241,7 @@ public class GeneraNotaCredito {
             ResultSet rs = null;
             String sql;
             stmt = conn.createStatement();
-            sql = consultas.NotaCreditoDetalle + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero
-                    + " AND PORCENTAJE_IVA>0 AND rownum=1";
+            sql = consultas.FacturaPorcentajeIva + " WHERE CODIGO='" + codigo + "' AND NUMERO='" + numero + "'";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 porcentajeIVA = rs.getInt("PORCENTAJE_IVA");
@@ -250,7 +249,7 @@ public class GeneraNotaCredito {
             rs.close();
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(GeneraNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GeneraFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
         return porcentajeIVA;
     }

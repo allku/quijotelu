@@ -12,9 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/data/git/quijotelu/src/java/com/xml/GeneraFactura.java</file>
-            <file>file:/data/git/quijotelu/src/java/com/jorge/firma/info/VerifyDateP12.java</file>
-            <file>file:/data/git/quijotelu/src/java/com/jorge/db/Consultas.java</file>
+            <file>file:/data/git/quijotelu/web/contacto.jsp</file>
+            <file>file:/data/git/quijotelu/web/informacion_empresa.jsp</file>
+            <file>file:/data/git/quijotelu/web/acerca.jsp</file>
+            <file>file:/data/git/quijotelu/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
