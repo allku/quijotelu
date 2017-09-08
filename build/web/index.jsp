@@ -16,6 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=general.Nombre%> Electrónico</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/starter-template.css" rel="stylesheet">
