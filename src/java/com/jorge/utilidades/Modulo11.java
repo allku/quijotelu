@@ -62,6 +62,7 @@ public class Modulo11 {
     }
 
     public int modulo11(String cadena) {
+        System.out.println("modulo11: " + cadena);
         return obtenerSumaPorDigitos(invertirCadena(cadena));
     }
 
