@@ -263,6 +263,51 @@ public class GeneraFactura {
         return null;
 
     }
+    
+     public String getNombreArchivo(String codigo, String numero) {
+        try {
+            MotorConfiguracion configMotor = new MotorConfiguracion();
+            Consultas consultas = new Consultas();
+            SRIConfiguracion sri = new SRIConfiguracion();
+            DataBaseConnection oc = new DataBaseConnection();
+            Modulo11 m11 = new Modulo11();
+            Connection conn;
+
+            String ClaveAcceso;
+            Date fecha = null;
+
+            conn = oc.getConnection(configMotor.getHost(), configMotor.getPuerto(), configMotor.getServicio(), configMotor.getUsuario(), configMotor.getClave());
+            generaInformacion(conn, consultas.InformacionTributaria);
+            generaMaestro(conn, consultas.FacturaMaestro, codigo, numero);
+            generaDetalle(conn, consultas.FacturaDetalle, codigo, numero);
+
+            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(infoF.getFechaEmision());
+
+            ClaveAcceso = (new SimpleDateFormat("ddMMyyyy").format(fecha)) + infoT.getCodDoc() + infoT.getRuc() + sri.getAmbiente() + infoT.getEstab() + infoT.getPtoEmi() + infoT.getSecuencial() + "12345678" + sri.getTipoEmision();
+
+            infoT.setClaveAcceso(ClaveAcceso + m11.modulo11(ClaveAcceso));
+            System.out.println("Clave de acceso factura " + infoT.getClaveAcceso());
+
+            factura.setInfoTributaria(infoT);
+            infoF.setTotalConImpuestos(new TotalConImpuestos(totalImpuesto));
+            factura.setInfoFactura(infoF);
+            factura.setDetalles(new Detalles(detalle));
+
+            formaPagoInformacionAdicional(conn, consultas.FormaPago, codigo, numero);
+
+            if (!informacionAdicional.getCampoAdicional().isEmpty()) {
+                factura.setInfoAdicional(informacionAdicional);
+            }
+
+            conn.close();
+            return ClaveAcceso + m11.modulo11(ClaveAcceso);
+
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(GeneraFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
 
     public int getPorcentajeIVA(Connection conn, String codigo, String numero) {
         int porcentajeIVA = 0;

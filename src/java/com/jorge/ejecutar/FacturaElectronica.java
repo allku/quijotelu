@@ -93,7 +93,7 @@ public class FacturaElectronica {
 
         return mensaje;
     }
-
+    
     public void reimprimir(String claveAcceso) {
         DirectorioConfiguracion dirConfig = new DirectorioConfiguracion();
         String RutaArchivoGenerado = dirConfig.getRutaArchivoGenerado();
@@ -108,4 +108,101 @@ public class FacturaElectronica {
         pdf.genera(numeroAutorizacion, fechaAutorizacion);
         System.out.println("Genera reporte");
     }
+    
+    public String generar() {
+
+        GeneraFactura fXML = new GeneraFactura();
+        DirectorioConfiguracion dirConfig = new DirectorioConfiguracion();
+
+        String RutaArchivoGenerado = dirConfig.getRutaArchivoGenerado();
+        String NombreArchivo;
+
+        NombreArchivo = fXML.genera(codigoComprobante, numeroComprobante, RutaArchivoGenerado);
+
+        System.out.println("Archivo "+ NombreArchivo + ".xml" + "Generado");
+        return "Archivo Generado";
+    }
+    
+     public String firmar() {
+
+        GeneraFactura fXML = new GeneraFactura();
+        DirectorioConfiguracion dirConfig = new DirectorioConfiguracion();
+
+        XAdESBESSignature xadesBesFirma = new XAdESBESSignature();
+        String RutaArchivoGenerado = dirConfig.getRutaArchivoGenerado();
+        String RutaArchivoFirmado = dirConfig.getRutaArchivoFirmado();
+        String NombreArchivo;
+      
+        ComprobanteElectronico ce = new ComprobanteElectronico();
+
+        NombreArchivo = fXML.getNombreArchivo(codigoComprobante, numeroComprobante);
+
+        xadesBesFirma.firmar(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml", NombreArchivo + ".xml", RutaArchivoFirmado);
+        
+        return "Archivo Firmado";
+    }
+     
+      public String autorizar() {
+        String mensaje = null;
+        String numeroAutorizacion;
+        String fechaAutorizacion;
+        GeneraFactura fXML = new GeneraFactura();
+        DirectorioConfiguracion dirConfig = new DirectorioConfiguracion();
+        GrabaRespuesta verifcaBaseDatos = new GrabaRespuesta(codigoComprobante, numeroComprobante);
+
+        SRIConfiguracion sriConfig = new SRIConfiguracion();
+        String RutaArchivoGenerado = dirConfig.getRutaArchivoGenerado();
+        String RutaArchivoFirmado = dirConfig.getRutaArchivoFirmado();
+        String NombreArchivo;
+        String wsEnvio = sriConfig.getWebServiceEnvio();
+        String wsAutoriza = sriConfig.getWebServiceAutoriza();
+        ComprobanteElectronico ce = new ComprobanteElectronico();
+
+        NombreArchivo = fXML.getNombreArchivo(codigoComprobante, numeroComprobante);
+
+        if (!verifcaBaseDatos.existeComprobante()) {
+            mensaje = ce.EnvioComprobante(new File(RutaArchivoFirmado + File.separatorChar + NombreArchivo + ".xml"), wsEnvio, wsAutoriza);
+            System.out.println("Envió al SRI");
+        } else {
+            mensaje = ce.AutorizacionComprobante(new File(RutaArchivoFirmado + File.separatorChar + NombreArchivo + ".xml"), wsAutoriza);
+            //mensaje = "No";
+            System.out.println("Solicito autorización al SRI");
+            if (!mensaje.equals("AUTORIZADO")) {
+                mensaje = ce.EnvioComprobante(new File(RutaArchivoFirmado + File.separatorChar + NombreArchivo + ".xml"), wsEnvio, wsAutoriza);
+            }
+        }
+
+        if (mensaje.equals("AUTORIZADO")) {
+
+            numeroAutorizacion = ce.getNumeroAutorizacion(NombreArchivo);
+            fechaAutorizacion = ce.getFechaAutorizacion(NombreArchivo);
+            GrabaRespuesta graba = new GrabaRespuesta(codigoComprobante, numeroComprobante, numeroAutorizacion, fechaAutorizacion, mensaje);
+            graba.setRespuesta();
+
+            System.out.println("Autorizó el SRI");
+            FacturaPDF pdf = new FacturaPDF(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml");
+            pdf.genera(numeroAutorizacion, fechaAutorizacion);
+            System.out.println("Genera reporte");
+            Correo correo = new Correo();
+            String destinatario;
+            destinatario = correo.extraer(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml");
+            if (!destinatario.equals("")) {
+                correo.enviar(new File(dirConfig.getRutaArchivoAutorizado() + File.separatorChar + NombreArchivo + ".xml"), new File(dirConfig.getRutaArchivoPDF() + File.separatorChar + NombreArchivo + ".pdf"), destinatario);
+            }
+
+        } else {
+            GrabaRespuesta graba = new GrabaRespuesta(codigoComprobante, numeroComprobante, mensaje);
+            graba.setRespuesta();
+            /*
+            FacturaPDF pdf = new FacturaPDF(RutaArchivoGenerado + File.separatorChar + NombreArchivo + ".xml");
+            pdf.genera("", "");
+            System.out.println("Genera reporte");
+            */
+            System.out.println("No autorizó el SRI");
+            System.out.println("Mensaje " + mensaje);
+        }
+
+        return mensaje;
+    }
+
 }
