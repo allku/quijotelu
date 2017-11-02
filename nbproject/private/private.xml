@@ -13,8 +13,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/data/git/quijotelu/src/java/com/xml/GeneraFactura.java</file>
-            <file>file:/data/git/quijotelu/src/java/com/jorge/propiedades/SRIConfiguracion.java</file>
-            <file>file:/data/git/quijotelu/src/java/com/jorge/utilidades/ArchivoUtils.java</file>
+            <file>file:/data/git/quijotelu/web/firmar_comprobante.jsp</file>
+            <file>file:/data/git/quijotelu/web/factura_no_autorizada.jsp</file>
+            <file>file:/data/git/quijotelu/src/java/testquijotelufe/TestquijoteluFE.java</file>
+            <file>file:/data/git/quijotelu/web/generar_comprobante.jsp</file>
         </group>
     </open-files>
 </project-private>

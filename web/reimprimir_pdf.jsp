@@ -17,7 +17,7 @@
         out.println("Número " + numero);
         DirectorioConfiguracion directorio = new DirectorioConfiguracion();
         String filename = claveAcceso + ".pdf";
-        if (codigo.equals("FAC")) {
+        if (codigo.equals("FAC") || codigo.equals("EXP")) {
             FacturaElectronica factura = new FacturaElectronica(codigo, numero);
             factura.reimprimir(claveAcceso);
             String filepath = directorio.getRutaArchivoPDF();

@@ -89,9 +89,15 @@
                                 out.println("<td>" + rs.getString(7) + "</td>");
                                 out.println("<td><a href=\"estado_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\" target=\"_blank\">" + rs.getString(8) + "</a></td>");
                                 out.println("<td><a href=\"procesar_autorizacion.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Autorizar</a></td>");
-                                out.println("<td><a href=\"generar_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Generar</a></td>");
-                                out.println("<td><a href=\"firmar_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Firmar</a></td>");
-                                out.println("<td><a href=\"autorizar_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Enviar</a></td>");
+                                if (rs.getString(1).equals("EXP")) {
+                                    out.println("<td><a href=\"generar_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Generar</a></td>");
+                                    out.println("<td><a href=\"firmar_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Firmar</a></td>");
+                                    out.println("<td><a href=\"autorizar_comprobante.jsp?codigo=" + rs.getString(1) + "&numero=" + rs.getString(2) + "\">Enviar</a></td>");
+                                }else{
+                                    out.println("<td>Generar</td>");
+                                    out.println("<td>Firmar</td>");
+                                    out.println("<td>Enviar</td>");
+                                }
                                 out.println("</tr>");
                             }
 
