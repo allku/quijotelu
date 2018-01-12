@@ -107,7 +107,7 @@ public class GeneraRetencion {
             Statement stmt = null;
             ResultSet rs = null;
             stmt = conn.createStatement();
-            String sql = consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero;
+            String sql = consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO='" + numero + "'";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 infoT.setCodDoc(rs.getString("CODIGO_DOCUMENTO"));
@@ -145,7 +145,7 @@ public class GeneraRetencion {
             ResultSet rs = null;
             List<Impuesto> impuesto = new ArrayList<>();
             stmt = conn.createStatement();
-            String sql = consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO=" + numero;
+            String sql = consulta + " WHERE CODIGO='" + codigo + "' AND NUMERO='" + numero + "'";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
 

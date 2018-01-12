@@ -94,7 +94,14 @@ public class FacturaPDF {
         try {
             JRDataSource dataSource = new JRBeanCollectionDataSource(fact.getDetallesAdiciones());
             is = new FileInputStream(urlReporte);
-            JasperPrint reporte_view = JasperFillManager.fillReport(is, obtenerMapaParametrosReportes(p.obtenerParametrosInfoTriobutaria(fact.getFactura().getInfoTributaria(), numAut, fechaAut), obtenerInfoFactura(fact.getFactura().getInfoFactura(), fact)), dataSource);
+            JasperPrint reporte_view = JasperFillManager.fillReport(is, 
+                    obtenerMapaParametrosReportes(
+                            p.obtenerParametrosInfoTriobutaria(fact.getFactura().getInfoTributaria(), 
+                                    numAut, 
+                                    fechaAut), 
+                            obtenerInfoFactura(fact.getFactura().getInfoFactura(), 
+                                    fact)), 
+                    dataSource);
             savePdfReport(reporte_view, fact.getFactura().getInfoTributaria().claveAcceso);
         } catch (FileNotFoundException | JRException ex) {
             Logger.getLogger(FacturaPDF.class.getName()).log(Level.SEVERE, null, ex);

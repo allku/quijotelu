@@ -73,8 +73,8 @@ public class TestquijoteluFE {
             pdf.genera("0203201512343510024568770013312187486", "02/03/2015 12:34:35.749");
     }
     static void imprimirFacturaPDF(){
-            FacturaPDF pdf = new FacturaPDF("C:\\app\\quijotelu\\generado\\3005201601109170775200110010020000005261234567817.xml");
-            pdf.genera("2503201518533510024568770013947035491", "25/03/2015 18:53:35");
+            FacturaPDF pdf = new FacturaPDF("/data/Instaladores/tmp/0812201701179237925300120021110000000071234567813.xml");
+            pdf.genera("", "");
     }
     static void imprimirGuiaRemisionPDF(){
             GuiaRemisionPDF pdf = new GuiaRemisionPDF("D:\\app\\quijotelu\\generado\\0409201506100245687700110010020000001211234567813.xml");
